@@ -16,6 +16,8 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  
+   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -87,7 +89,7 @@
     description = "chris";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
+    #  firefox
     #  thunderbird
     ];
   };
@@ -104,10 +106,15 @@
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    kate
+    thunderbird
+    vscodium
+    neofetch
+    wgnord
+    wget
+    nil
+    nixpkgs-fmt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -117,7 +124,15 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
+  programs = {
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
+    firefox.enable = true;
+    #steam.enable = true;
+    git.enable = true;
+  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
